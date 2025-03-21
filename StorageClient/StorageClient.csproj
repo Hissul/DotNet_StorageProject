@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\concept.png" />
+    <None Remove="Resources\underConstruction.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassesLib\ClassesLib.csproj" />
+    <ProjectReference Include="..\PrefixLib\PrefixLib.csproj" />
+    <ProjectReference Include="..\Request\Request.csproj" />
+    <ProjectReference Include="..\StorageDBCodeFirst\StorageDBCodeFirst.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Config.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\concept.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\underConstruction.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

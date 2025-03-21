@@ -1,0 +1,69 @@
+﻿<Window x:Class="StorageClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StorageClient"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen" FontSize="20" Loaded="Window_Loaded"
+        MinHeight="700" MinWidth="1200">
+    
+    <Grid Style="{StaticResource windowBackground}">
+        
+        <!-- Логин скрин -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            
+            <RowDefinition />
+
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="1" Margin="0 0 0 10" Style="{StaticResource textblockStyle}"
+                   HorizontalAlignment="Center" FontSize="18">
+            Логин :
+        </TextBlock>
+
+        <TextBox Grid.Row="2" x:Name="loginBox" Style="{StaticResource textBoxStyle}"
+                 Height="30" Width="200"  
+                 PreviewMouseLeftButtonDown="loginBox_PreviewMouseLeftButtonDown"/>
+
+        <TextBlock Grid.Row="3" x:Name="wrongTextBlock"
+                   HorizontalAlignment="Center" 
+                   FontSize="13" Foreground="Red" Visibility="Hidden">
+            Неверный логин или пароль
+        </TextBlock>
+
+        <TextBlock Grid.Row="3" x:Name="warningTextBlock"
+                   HorizontalAlignment="Center" 
+                   FontSize="13" Foreground="Red" Visibility="Hidden">
+            Заполните поле логин и пароль
+        </TextBlock>
+
+        <TextBlock Grid.Row="4" Margin="0 0 0 10" Style="{StaticResource textblockStyle}"
+                   HorizontalAlignment="Center" FontSize="18">
+            Пароль :
+        </TextBlock>
+
+        <PasswordBox Grid.Row="5" x:Name="passwordBox" Style="{StaticResource passwordBoxStyle}"
+                     Height="30" Width="200" 
+                     PreviewMouseLeftButtonDown="passwordBox_PreviewMouseLeftButtonDown"/>
+
+        <Button Grid.Row="6" Margin="0 20 0 0 "
+                Height="40" Width="150" 
+                x:Name="loginButton" Click="loginButton_Click">
+            Login
+        </Button>
+
+       
+
+    </Grid>
+</Window>

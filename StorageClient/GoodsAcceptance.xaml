@@ -1,0 +1,258 @@
+﻿<Window x:Class="StorageClient.GoodsAcceptance"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StorageClient"
+        mc:Ignorable="d"
+        Title="GoodsAcceptance" Height="450" Width="500"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid Style="{StaticResource windowBackground}">
+        
+        <!--   -->
+        <Grid x:Name="documentScreen">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>  
+            
+            <UniformGrid Grid.Row="0" Rows="1">
+                <TextBlock TextAlignment="Right" Style="{StaticResource textblockStyle}"
+                           Height="20" 
+                           VerticalAlignment="Bottom" Margin="10 10">
+                    Номер документа :
+                </TextBlock>
+
+                <TextBox Height="25" Width="100" Style="{StaticResource textBoxStyle}"
+                         x:Name="docNumberTextBox"
+                         HorizontalAlignment="Left" FontSize="18"
+                         VerticalAlignment="Bottom"
+                         Margin="10 10" TextChanged="docNumberTextBox_TextChanged"/>
+            </UniformGrid>
+
+            <UniformGrid Grid.Row="1" Rows="1">
+                <Button Width="100" Height="40" x:Name="nextButton"
+                        VerticalAlignment="Top" HorizontalAlignment="Right"
+                        Margin="10 10" Click="nextButton_Click"
+                        IsEnabled="False">
+                    Далее
+                </Button>
+                <Button Width="100" Height="40" x:Name="cancelButton"
+                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                        Margin="10 10" Click="cancelButton_Click">
+                    Отмена
+                </Button>
+            </UniformGrid>
+        </Grid>
+        
+        <!--   -->
+        <Grid x:Name="productScreen" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="25"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" Grid.Column="1" Margin="0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Style="{StaticResource textblockStyle}"
+                           HorizontalAlignment="Center">
+                    Товар :
+                </TextBlock>
+
+                <ComboBox Grid.Column="1" ItemsSource="{Binding UserProducts}"
+                          x:Name="productComboBox" 
+                          SelectionChanged="productComboBox_SelectionChanged"/>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="1" Margin="0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Style="{StaticResource textblockStyle}"
+                           HorizontalAlignment="Center">
+                    Серия :
+                </TextBlock>
+
+                <ComboBox Grid.Column="1" x:Name="partyComboBox" 
+                          IsEnabled="False" 
+                          ItemsSource="{Binding ProductParty}" SelectionChanged="partyComboBox_SelectionChanged"/>
+                
+                <Button Grid.Column="2" x:Name="addPartyButton" 
+                        IsEnabled="False"
+                        Width="40" Margin="10 0" Click="addPartyButton_Click">
+                    <Button.ToolTip>
+                        <ToolTip>
+                            Добавить новую серию
+                        </ToolTip>
+                    </Button.ToolTip>
+                    +
+                </Button>
+                
+                <Grid Grid.Column="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Style="{StaticResource textBoxStyle}"
+                             x:Name="newPartyTextBox" Margin="0 0 10 0"
+                             IsEnabled="False" TextChanged="newPartyTextBox_TextChanged"/>
+                    
+                    <Button Grid.Column="1" x:Name="acceptPartyButton"
+                            Width="40"
+                            IsEnabled="False" Click="acceptPartyButton_Click" >
+                        <Button.ToolTip>
+                            <ToolTip>
+                                Сохранить серию
+                            </ToolTip>
+                        </Button.ToolTip>
+                        ok
+                    </Button>
+                </Grid>
+                
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="1" Margin="0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Style="{StaticResource textblockStyle}"
+                           HorizontalAlignment="Center">
+                    Количество :
+                </TextBlock>
+
+                <TextBox Grid.Column="1" Style="{StaticResource textBoxStyle}"
+                         x:Name="amountTextBox" 
+                         IsEnabled="False" TextChanged="amountTextBox_TextChanged"/>
+            </Grid>
+
+            <Grid Grid.Row="4" Grid.Column="1" Margin="0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Style="{StaticResource textblockStyle}"
+                           HorizontalAlignment="Center">
+                    Стелаж :
+                </TextBlock>
+
+                <ComboBox Grid.Column="1" x:Name="rackComboBox"
+                          ItemsSource="{Binding Locations}"
+                          IsEnabled="False" SelectionChanged="rackComboBox_SelectionChanged"/>
+            </Grid>
+
+            <Button Grid.Row="5" Grid.Column="1" x:Name="nextGoodButton"
+                    Margin="0 10" Width="200" 
+                    IsEnabled="False" Click="nextGoodButton_Click">
+                Далее
+            </Button>
+
+            <DataGrid Grid.Row="6" Grid.Column="1" 
+                      Style="{StaticResource dataGridStyle}"
+                      ItemsSource="{Binding ProductAcceptances}"
+                      AutoGenerateColumns="False">
+
+                <!--<DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="Background" Value="#202731" />
+                        <Setter Property="Foreground" Value="#C5C6C8" />
+                    </Style>
+                </DataGrid.Resources>-->
+
+                <DataGrid.Columns>
+
+                    <DataGridTemplateColumn Header="№ Документа">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DocumentNumber}" Width="90" TextAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Товар">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ProductName}" Width="80" TextAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Серия" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Party}" Width="80" TextAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Количество" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Amount}" Width="80" TextAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Новое?">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsNew}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+               
+                </DataGrid.Columns>
+            </DataGrid>
+
+
+            <Grid Grid.Row="7" Grid.Column="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Margin="0 10 5 0" 
+                        x:Name="saveButton" Click="saveButton_Click">
+                    Сохранить
+                </Button>
+                
+                <Button Grid.Column="1" Margin="5 10 0 0"
+                        x:Name="abortButton" Click="abortButton_Click">
+                    Отмена
+                </Button>
+            </Grid>        
+
+        </Grid>
+    </Grid>
+</Window>
